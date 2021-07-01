@@ -4,6 +4,9 @@
 import * as React from 'react'
 
 function UsernameForm({onSubmitUsername}) {
+
+  const inputRef = React.useRef(null);
+
   // 🐨 add a submit event handler here (`handleSubmit`).
   // 💰 Make sure to accept the `event` as an argument and call
   // `event.preventDefault()` to prevent the default behavior of form submit
@@ -11,9 +14,10 @@ function UsernameForm({onSubmitUsername}) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const username = event.target.elements.usernameInput.value;
+    const username = inputRef.current.value;
     onSubmitUsername(username);
   }
+
   // 🐨 get the value from the username input (using whichever method
   // you prefer from the options mentioned in the instructions)
   // 💰 For example: event.target.elements[0].value
@@ -26,8 +30,8 @@ function UsernameForm({onSubmitUsername}) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Username:</label>
-        <input name="usernameInput" type="text" />
+        <label htmlFor="usernameInput">Username:</label>
+        <input ref={inputRef} id="usernameInput" type="text" />
       </div>
       <button type="submit">Submit</button>
     </form>
